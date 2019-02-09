@@ -1,12 +1,14 @@
 var mongoose = require('mongoose');
 require('mongoose-long')(mongoose);
+require('mongoose-double')(mongoose);
 var bcrypt = require('bcrypt');
 
 var Long = mongoose.Schema.Types.Long;
+var Double = mongoose.Schema.Types.Double;
 
 var PurchaseItemSchema = new mongoose.Schema({
     cost: {
-        type: Decimal128,
+        type: String,
         required: true,
     },
     type: {
@@ -25,6 +27,6 @@ var PurchaseItemSchema = new mongoose.Schema({
     }
 });
 
-var PurchaseItem = mongoose.model('user', PurchaseItemSchema);
+var PurchaseItem = mongoose.model('PurchaseItem', PurchaseItemSchema);
 
 module.exports = PurchaseItem;

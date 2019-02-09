@@ -3,8 +3,10 @@ require('mongoose-long')(mongoose);
 var bcrypt = require('bcrypt');
 
 var PurchaseItem = require('./budget/PurchaseItem.js');
+var UserAccount = require('./budget/UserAccount.js');
 
 var Long = mongoose.Schema.Types.Long;
+var Double = mongoose.Schema.Types.Double;
 
 var passMinLength = 8;
 var passMaxLength = 64;
@@ -48,9 +50,9 @@ var userSchema = new mongoose.Schema({
         required: true,
     },
     account: {
-        type: PurchaseItem,
-        required: false,
-    },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserAccount',
+    }
 });
 
 userSchema.path('password').validate(function(psw) {
