@@ -1,0 +1,11 @@
+{
+  "name": "business-webapp",
+  "version": "1.0.0",
+  "description": "A business webapp developed during the uOttaHack 2019",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
