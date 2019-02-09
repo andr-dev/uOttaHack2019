@@ -9,6 +9,7 @@ const user = require('./mongo/user.js');
 const _path = __dirname + '/views/';
 const _path_login = _path + 'login.html';
 const _path_dashboard = _path + 'dashboard.html';
+const _path_profile = _path + 'profile.html';
 
 createUser('bobross', 'bobross@gmail.com', 'thepainter', true, 'Bob', 'Ross');
 
@@ -52,11 +53,11 @@ router.get('/dashboard', (req, res) => {
     });
 });
 
-router.get('/dashboard', (req, res) => {
+router.get('/profile', (req, res) => {
     authenticate(req.session.userId, (err, accType) => {
         if (!err) {
             if (accType != null) { // fix depending on user
-                res.sendFile(_path_dashboard);
+                res.sendFile(_path_profile);
             } else {
                 console.log('AUTH : User unauthorized');
                 res.redirect('/');
