@@ -1,3 +1,10 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+html, body {
+	height: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
 
 /* FOOTER */
 footer {
@@ -39,4 +46,19 @@ footer {
 	margin-bottom: 2%;
   padding-left: 2%;
   padding-right: 2%
+}
+
+.form-row {
+	border:  1px solid #e2e2e2;
+	margin:  10px;
+	padding: 20px;
+	background: #f2f2f2;
+}
+.subrow {
+  margin: 5px;
+  padding:  5px;
+}
+
+.pic-caption {
+  text-align: center;
 }
