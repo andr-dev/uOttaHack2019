@@ -54,6 +54,19 @@
         }
     }
 
+    function validate (input) {
+        if($(input).attr('type') == 'password' || $(input).attr('name') == 'pass') {
+            if($(input).val().trim().length()< 8 || $(input).val().trim().length() > 64) {
+                return false;
+            }
+        }
+        else {
+            if($(input).val().trim() == ''){
+                return false;
+            }
+        }
+    }
+
     function showValidate(input) {
         var thisAlert = $(input).parent();
 
