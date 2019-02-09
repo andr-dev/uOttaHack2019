@@ -60,5 +60,10 @@ footer {
 }
 
 .pic-caption {
-  text-align: center;
+    text-align: center;
+}
+
+.ib {
+    display: inline-block;
+    width: -webkit-fill-available;
 }
