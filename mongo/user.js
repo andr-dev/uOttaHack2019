@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 require('mongoose-long')(mongoose);
 var bcrypt = require('bcrypt');
 
+var PurchaseItem = require('./budget/PurchaseItem.js');
+
 var Long = mongoose.Schema.Types.Long;
 
 var passMinLength = 8;
@@ -44,7 +46,11 @@ var userSchema = new mongoose.Schema({
     dateCreated: {
         type: Long,
         required: true,
-    }
+    },
+    account: {
+        type: PurchaseItem,
+        required: false,
+    },
 });
 
 userSchema.path('password').validate(function(psw) {
