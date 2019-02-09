@@ -1,0 +1,77 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+html, body {
+	height: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+/* FOOTER */
+footer {
+    background: black;
+    color: grey;
+    text-align: center;
+    padding: 30px 30px;
+    font-size: 12px;
+}
+
+.basic-info-form {
+  margin-left: 60%;
+  padding: 5%;
+}
+
+.financial-form {
+  padding: 5%;
+}
+
+.image--cover {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-left: 250%;
+  object-fit: cover;
+  margin-top: 80px;
+  object-position: center;
+}
+
+figure {
+  float: left;
+  margin-left: 20%
+}
+
+.seperator {
+  border-bottom: 1px solid #a2a2a2;
+	width: 100%;
+	display: inline-block;
+	margin-top: 2%;
+	margin-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 2%
+}
+
+.form-row {
+	border:  1px solid #e2e2e2;
+	margin:  10px;
+	padding: 20px;
+	background: #f2f2f2;
+}
+.subrow {
+  margin: 5px;
+  padding:  5px;
+}
+
+.pic-caption {
+  text-align: center;
+}
+
+.content-center {
+  margin-right:9%;
+  margin-left:4%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+  height: 2900px;
+  background-color: white;
+  text-align: center;
+}
+
+h1 {
+  padding-top: 7%
+}
