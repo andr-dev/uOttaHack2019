@@ -7,3 +7,36 @@ footer{
     padding: 30px 30px;
     font-size: 12px;
 }
+
+.basic-info-form {
+  margin-left: 60%;
+  padding: 5%;
+}
+
+.financial-form {
+  padding: 5%;
+}
+
+.image--cover {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-left: 250%;
+  object-fit: cover;
+  margin-top: 80px;
+  object-position: center;
+}
+
+.profile-pic {
+  float: left;
+}
+
+.seperator {
+  border-bottom: 1px solid #a2a2a2;
+	width: 100%;
+	display: inline-block;
+	margin-top: 2%;
+	margin-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 2%
+}
