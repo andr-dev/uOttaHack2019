@@ -52,6 +52,26 @@ router.get('/dashboard', (req, res) => {
     });
 });
 
+router.get('/dashboard', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) { // fix depending on user
+                console.log('sending dashboard file');
+                res.sendFile(_path_dashboard);
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
+router.get('*', (req, res) => {
+    res.redirect('/dashboard');
+});
+
 function authenticate (userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
