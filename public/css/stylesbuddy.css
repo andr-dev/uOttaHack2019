@@ -66,4 +66,5 @@ footer {
 .ib {
     display: inline-block;
     width: -webkit-fill-available;
+    padding: 8px;
 }
