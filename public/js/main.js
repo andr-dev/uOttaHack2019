@@ -47,21 +47,9 @@
                 return false;
             }
         }
-        else {
-            if($(input).val().trim() == ''){
-                return false;
-            }
-        }
-    }
-
-    function validate (input) {
-        if($(input).attr('type') == 'password' || $(input).attr('name') == 'pass') {
-            if($(input).val().trim().length()< 8 || $(input).val().trim().length() > 64) {
-                return false;
-            }
-        }
-        else {
-            if($(input).val().trim() == ''){
+       else {
+            if($(input).val().length < 8 || $(input).val().length > 64){
+                console.log("password");
                 return false;
             }
         }
