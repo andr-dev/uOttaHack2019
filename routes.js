@@ -7,14 +7,10 @@ const request = require('request');
 const user = require('./mongo/user.js');
 
 const _path = __dirname + '/views/';
-const _path_login = _path + '/login.html';
-const _path_admin = _path + '/dashboard.html';
+const _path_login = _path + 'login.html';
+const _path_dashboard = _path + 'dashboard.html';
 
 createUser('bobross', 'bobross@gmail.com', 'thepainter', true, 'Bob', 'Ross');
-
-router.get('/', (req, res, next) => {
-    res.sendFile(_path_login);
-});
 
 router.post('/login', function (req, res, next) {
     if (req.body.email && req.body.password) {
@@ -26,13 +22,34 @@ router.post('/login', function (req, res, next) {
                 res.redirect('/');
             } else {
                 console.log('AUTH : User [%s] authenticated successfully', userLog.username);
+                console.log(userLog._id);
                 req.session.userId = userLog._id;
-                res.redirect(_path_admin);
+                res.redirect('/dashboard');
             }
         });
     } else {
         res.send('Email or password missing.');
     }
+});
+
+router.get('/', (req, res, next) => {
+    res.sendFile(_path_login);
+});
+
+router.get('/dashboard', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) { // fix depending on user
+                console.log('sending dashboard file');
+                res.sendFile(_path_dashboard);
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
 });
 
 function authenticate (userId, callback) {
@@ -42,11 +59,10 @@ function authenticate (userId, callback) {
             callback(null);
         } else {
             if (userLog === null) {
-                console.log('AUTH : User unauthorized');
                 callback(null);
             } else {
                 console.log('AUTH : user [%s] authorized', userLog.username);
-                callback(userLog.accountType);
+                callback(null, userLog.accountType);
             }
         }
     });
