@@ -49,7 +49,6 @@
         }
        else {
             if($(input).val().length < 8 || $(input).val().length > 64){
-                console.log("password");
                 return false;
             }
         }
