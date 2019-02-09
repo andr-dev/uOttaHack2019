@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/uOttahack2019.iml" filepath="$PROJECT_DIR$/uOttahack2019.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/business-webapp.iml" filepath="$PROJECT_DIR$/.idea/business-webapp.iml" />
+>>>>>>> 89a8d4ea0fe352e2b5e2b85e9666e5d33651b3e9
     </modules>
   </component>
 </project>

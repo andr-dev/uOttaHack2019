@@ -1,0 +1,44 @@
+var express = require("express");
+var fs = require('fs');
+var app = express();
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+require('mongoose-long')(mongoose);
+var MongoStore = require('connect-mongo')(session);
+
+const _path = __dirname + '/public/';
+
+// mongoose.connect('', {useCreateIndex: true, useNewUrlParser: true});
+// var db = mongoose.connection;
+// mongoose.set('useFindAndModify', false);
+
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function () {
+//     console.log('Mongoose Connected');
+//     db.dropDatabase(function () {
+//       console.log('Reset MongoDB Database');
+//     });
+// });
+
+app.use(session({
+    secret: 'abcde12345_idk_uOttaHack2019',
+    resave: true,
+    saveUninitialized: false,
+    // store: new MongoStore({
+    //     mongooseConnection: db
+    // })
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static(_path));
+const routes = require('./routes.js');
+app.use('/', routes);
+
+var port = 3000;
+
+app.listen(port, function () {
+    console.log('Server started on port: ' + port);
+})
