@@ -9,6 +9,8 @@ function tableCreate () {
         } else {
             console.log(JSON.stringify(data));
 
+            var inputDelete = document.getElementById('inputDelete');
+
             var dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
             for (var i = 0; i < data.length; i++) {
@@ -33,6 +35,10 @@ function tableCreate () {
                 row.appendChild(c4);
 
                 tableTBody.appendChild(row);
+
+                var a = document.createElement('option');
+                a.innerHTML = data[i].purchaseType + ' - ' + data[i].description;
+                inputDelete.appendChild(a);
             }
         }
     });
@@ -73,6 +79,27 @@ function postExpenseData () {
         purchaseType: document.getElementById('inputType').value,
         datePurchased: new Date(document.getElementById('inputDate').value).getTime(),
     };
+
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+
+    console.log(out);
+
+    xhttp.send(JSON.stringify(out));
+}
+
+function postExpenseDelete () {
+    console.log('u hit the button');
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            location.reload();
+        }
+    };
+
+    xhttp.open("POST", '/post/expense_delete', true);
+
+    var out = document.getElementById('inputDelete').value.split(' - ');
 
     xhttp.setRequestHeader('Content-Type', 'application/json');
 
