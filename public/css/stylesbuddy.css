@@ -4,6 +4,7 @@ html, body {
 	height: 100%;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+  font-family: Raleway;
 }
 /* FOOTER */
 footer {
@@ -78,4 +79,8 @@ h1 {
 
 .ib {
     width: -webkit-fill-available;
+}
+
+.cx {
+    height: 30%;
 }
