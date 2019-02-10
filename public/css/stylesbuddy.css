@@ -5,7 +5,6 @@ html, body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
 /* FOOTER */
 footer {
     background: black;
@@ -34,8 +33,9 @@ footer {
   object-position: center;
 }
 
-.profile-pic {
+figure {
   float: left;
+  margin-left: 20%
 }
 
 .seperator {
@@ -60,10 +60,18 @@ footer {
 }
 
 .pic-caption {
-    text-align: center;
+  text-align: center;
 }
 
-.ib {
-    display: inline-block;
-    width: -webkit-fill-available;
+.content-center {
+  margin-right:9%;
+  margin-left:4%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+  height: 2900px;
+  background-color: white;
+  text-align: center;
+}
+
+h1 {
+  padding-top: 7%
 }
