@@ -17,6 +17,10 @@
             <!-- Logo -->
             <div class="navbar-header">
                 <img src="/images/banner_budgetbuddy_x1024.png" style="height: 50px; padding-right: 8px;">
+<<<<<<< HEAD
+=======
+                <img src="../public/images/banner_budgetbuddy_x1024.png" style="height: 50px; padding-right: 8px;">
+>>>>>>> parent of 926f310... asfgdhj
             </div>
 
             <!-- Menu Items -->
@@ -32,6 +36,112 @@
     </nav>
 </header>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<center><h1>Expenses</h1></center>
+
+<div class="profile-pic">
+    <img src="http://www.advancedsec.com/wp-content/uploads/2018/11/profile-blank.png" class="image--cover">
+    <p>
+    <div class="pic-caption">
+        Upload Profile Picture
+    </div>
+</div>
+<!-- Form -->
+<form class="basic-info-form">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Email address</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Name</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="John Doe">
+    </div>
+</form>
+<!-- Form -->
+<span class="seperator"></span>
+<section class="features">
+    <figure></figure>
+    <figure></figure>
+</section>
+
+<center><h1>Enter Categories</h1></center>
+
+<!-- Form 2-->
+<div id="app" class="container">
+    <div class="col-xs-12">
+        <div class="row  form-row" v-for="row in rows">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" placeholder="Category" v-model="row.name">
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="text" class="form-control" placeholder="Value" v-model="row.name2">
+                        </div>
+                        <div class="col-xs-1">
+                            <button class="btn btn-danger" @click="deleteRow(row)">X</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-if="row.select==3 || row.select==4 ">
+                    <div class="row subrow" v-for="subrow in row.subrows">
+                        <div class="col-xs-12">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-7">
+                                <input type="text" class="form-control" v-model="subrow.answer">
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-danger" @click="deleteSubrow(row,subrow)">X</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success center-block" @click="addSubRow(row)">Add Answer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-info" style="margin-bottom: 10px">Submit</button>
+                <button type="submit" class="btn btn-success" @click="addRow" style="margin-bottom: 10px">Add Row</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            rows: [
+                { 'select': 1, 'name': '', 'check': false, 'subrows': [{  answer: ''}]}
+            ]
+        },
+        methods: {
+            addRow: function() {
+                this.rows.push({'select': 1, 'name': '', 'check': false, subrows: [{ answer: ''} ]});
+            },
+            deleteRow: function(row) {
+                this.rows.$remove(row);
+            },
+            addSubRow: function(row) {
+                row.subrows.push({ answer: ''})
+            },
+            deleteSubrow: function(row, subrow) {
+                row.subrows.$remove(subrow);
+            }
+        }
+    })
+</script>
+>>>>>>> 80640aa5cf7ac3be13c8d95ed879de52c7b30003
+>>>>>>> parent of 926f310... asfgdhj
 <footer>
     2018
 </footer>
