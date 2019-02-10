@@ -19,18 +19,16 @@ footer {
   padding: 5%;
 }
 
-.financial-form {
-  padding: 5%;
-}
 
 .image--cover {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin-left: 250%;
-  object-fit: cover;
-  margin-top: 80px;
-  object-position: center;
+    background-size: 100%;
+    width: 15%;
+    height: 15%;
+    border-radius: 50%;
+    margin-top: 80px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 figure {
@@ -61,7 +59,10 @@ figure {
 }
 
 .pic-caption {
-  text-align: center;
+    text-align: center;
+    font-family: Papyrus;
+    font-size: 20px;
+
 }
 
 .content-center {
