@@ -613,7 +613,19 @@ function setDataCategoriesTable(userId, body, callback) {
                 callback(null);
             } else {
                 for (var i = 0; i < body.length; i++) {
-                    userLog.account.purchaseTypeList.push(body[i].category);
+
+                    var dup = false;
+
+                    for (var a = 0; a < userLog.account.purchaseTypeList.length; a++) {
+                        if (userLog.account.purchaseTypeList[a] === body[i].category) {
+                            console.log('found dup');
+                            dup = true;
+                        }
+                    }
+
+                    if (!dup) {
+                        userLog.account.purchaseTypeList.push(body[i].category);
+                    }
 
                     var cost = body[i].value;
 
@@ -659,22 +671,9 @@ function createExpense(userId, body, callback) {
                     dateCreated: Date.now(),
                 };
 
-                var dup = false;
-
-                for (var i = 0; i < userLog.account.purchaseHistory.length; i++) {
-                    console.log(userLog.account.purchaseHistory[i]);
-                    if (userLog.account.purchaseHistory[i].description === data.description) {
-                        dup = true;
-                    }
-                }
-
-                if (!dup) {
-                    userLog.account.purchaseHistory.push(data);
-                    userLog.save();
-                    callback();
-                } else {
-                    callback();
-                }
+                userLog.account.purchaseHistory.push(data);
+                userLog.save();
+                callback();
             }
         }
     });

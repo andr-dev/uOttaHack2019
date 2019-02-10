@@ -83,8 +83,9 @@ function addData(category, value){
     var div2_a_i = document.createElement('input');
     div2_a_i.className = 'form-control';
     div2_a_i.setAttribute('type', 'text');
-    div2_a_i.setAttribute('placeholder', category);
+    div2_a_i.setAttribute('placeholder', 'Category');
     div2_a_i.setAttribute('oninput', 'updateInputCat(this.value, ' + data.length + ')');
+    div2_a_i.value = category;
 
     div2_a.appendChild(div2_a_i);
 
@@ -94,8 +95,9 @@ function addData(category, value){
     var div2_b_i = document.createElement('input');
     div2_b_i.className = 'form-control';
     div2_b_i.setAttribute('type', 'text');
-    div2_b_i.setAttribute('placeholder', value);
+    div2_b_i.setAttribute('placeholder', 'Value');
     div2_b_i.setAttribute('oninput', 'updateInputValues(this.value, ' + data.length + ')');
+    div2_b_i.value = value;
 
     div2_b.appendChild(div2_b_i);
 
