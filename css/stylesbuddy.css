@@ -76,3 +76,7 @@ figure {
 h1 {
   padding-top: 7%
 }
+
+.ib {
+    width: -webkit-fill-available;
+}
