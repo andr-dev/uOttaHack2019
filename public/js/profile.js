@@ -19,9 +19,9 @@ function divCreate () {
         } else {
             console.log(JSON.stringify(data));
 
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
 
-                addData('', '');
+                addData(data[i].category, data[i].value);
 
             }
 
@@ -72,6 +72,7 @@ function addData(category, value){
 
     var div1 = document.createElement('div');
     div1.className = 'row form-row';
+    div1.setAttribute('id', 'r' + data.length);
 
     var div2 = document.createElement('div');
     div2.className = 'row';
@@ -82,7 +83,7 @@ function addData(category, value){
     var div2_a_i = document.createElement('input');
     div2_a_i.className = 'form-control';
     div2_a_i.setAttribute('type', 'text');
-    div2_a_i.setAttribute('placeholder', 'Category');
+    div2_a_i.setAttribute('placeholder', category);
     div2_a_i.setAttribute('oninput', 'updateInputCat(this.value, ' + data.length + ')');
 
     div2_a.appendChild(div2_a_i);
@@ -93,7 +94,7 @@ function addData(category, value){
     var div2_b_i = document.createElement('input');
     div2_b_i.className = 'form-control';
     div2_b_i.setAttribute('type', 'text');
-    div2_b_i.setAttribute('placeholder', 'Value');
+    div2_b_i.setAttribute('placeholder', value);
     div2_b_i.setAttribute('oninput', 'updateInputValues(this.value, ' + data.length + ')');
 
     div2_b.appendChild(div2_b_i);
@@ -101,7 +102,7 @@ function addData(category, value){
     var div2_c = document.createElement('div');
     div2_c.className = 'col-xs-2';
 
-    var div2_c_i = document.createElement('input')
+    var div2_c_i = document.createElement('input');
     div2_c_i.setAttribute('type', 'checkbox');
     div2_c_i.setAttribute('name', 'Mandatory');
 
@@ -119,6 +120,7 @@ function addData(category, value){
     var div2_d_b = document.createElement('button');
     div2_d_b.className = 'btn btn-danger';
     div2_d_b.innerHTML = 'X';
+    div2_d_b.setAttribute('onclick', "deleteData(" + data.length + ")");
 
     div2_d.appendChild(div2_d_b);
 
@@ -129,12 +131,18 @@ function addData(category, value){
 
     div1.appendChild(div2);
 
-    table.append(div1);
+    table.appendChild(div1);
 
     values = {"category": category, "value": value};
     data.push(values);
 
     console.log(data);
+}
+
+function deleteData (pos) {
+    data.splice(pos, 1);
+
+    document.getElementById('r' + pos).parentNode.removeChild(document.getElementById('r' + pos));
 }
 
 function updateInputValues (value, pos) {

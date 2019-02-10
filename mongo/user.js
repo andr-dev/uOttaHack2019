@@ -46,6 +46,10 @@ var userSchema = new mongoose.Schema({
         required: true,
     },
     account: {
+        budget: {
+            type: Number,
+            requried: true,
+        },
         balance: {
             type: Number,
             required: true,

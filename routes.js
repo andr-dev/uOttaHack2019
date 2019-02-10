@@ -117,7 +117,7 @@ function authenticate (userId, callback) {
 }
 
 function createUser (username, email, password, accountType, name_first, name_last) {
-    const now = Math.round((new Date()).getTime() / 1000);
+    const now = Date.now();;
 
     var purchaseHistory = [];
 
@@ -128,7 +128,7 @@ function createUser (username, email, password, accountType, name_first, name_la
             description: 'a singular krispy kreme dunut',
             cost: getRandomInt(100),
             purchaseType: purchaseTypeList[i % 7],
-            datePurchased: 1549750000 + i*10,
+            datePurchased: now + i*10,
             dateCreated: now,
         }
     }
@@ -233,7 +233,7 @@ router.post('/post/categories_table', (req, res) => {
         if (!err) {
             if (accType != null) {
                 setDataCategoriesTable(req.session.userId, req.body, function (data) {
-                    res.send(data);
+                    res.redirect('/profile');
                 });
             } else {
                 console.log('AUTH : User unauthorized');
@@ -363,9 +363,13 @@ function getDataCategoriesTable (userId, callback) {
                 var out = [];
 
                 for (var i = 7; i < userLog.account.purchaseTypeList.length; i++) { // 7 hc
-                    out[i] = userLog.account.purchaseTypeList[i];
+                    out[out.length] = {
+                        category: userLog.account.purchaseTypeList[i],
+                        value: '',
+                    }
                 }
 
+                console.log(out);
                 callback(out);
             }
         }
@@ -381,16 +385,29 @@ function setDataCategoriesTable (userId, body, callback) {
             if (userLog === null) {
                 callback(null);
             } else {
-                console.log(body);
-
-                console.log(body[0]);
-
-                console.log(body.length);
-
                 for (var i = 0; i < body.length; i++) {
                     userLog.account.purchaseTypeList.push(body[i].category);
-                    userLog.save();
+
+                    var cost = body[i].value;
+
+                    if (cost === '') {
+                        cost = 0;
+                    }
+
+                    var d = Date.now();
+
+                    var thing = {
+                        description: '',
+                        cost: cost,
+                        purchaseType: body[i].category,
+                        datePurchased: d,
+                        dateCreated: d,
+                    }
+
+                    userLog.account.purchaseHistory.push(thing);
                 }
+
+                userLog.save();
             }
         }
     });
