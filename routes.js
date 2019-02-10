@@ -338,6 +338,23 @@ router.post('/post/expense_new', (req, res) => {
     });
 });
 
+router.post('/post/expense_delete', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                deleteExpense(req.session.userId, req.body, function () {
+                    res.redirect('/expenses');
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
 function getDataExpenses(userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
@@ -645,6 +662,37 @@ function createExpense(userId, body, callback) {
                 userLog.account.purchaseHistory.push(data);
                 userLog.save();
                 callback();
+            }
+        }
+    });
+}
+
+function deleteExpense(userId, body, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                console.log(body);
+
+                var found = false;
+
+                userLog.account.purchaseHistory.find(function (element) {
+                    if (element != null && !found) {
+                        if (element.purchaseType === body[0] && element.description === body[1]) {
+                            console.log('this');
+                            console.log(element);
+                            userLog.account.purchaseHistory.pull({_id: element._id});
+                            userLog.save().then(function () {
+                                found = true;
+                                callback();
+                            });
+                        }
+                    }
+                });
             }
         }
     });
