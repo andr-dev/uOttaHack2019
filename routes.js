@@ -236,6 +236,57 @@ router.get('/data/expenses_table', (req, res) => {
     });
 });
 
+router.get('/data/expenses_mandatory', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                getDataExpensesMandatory(req.session.userId, function (data) {
+                    res.send(data);
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
+router.get('/data/expenses_nonmandatory', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                getDataExpensesNonMandatory(req.session.userId, function (data) {
+                    res.send(data);
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
+router.get('/data/purchase_type', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                getPurchaseType(req.session.userId, function (data) {
+                    res.send(data);
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
 router.get('/data/categories_table', (req, res) => {
     authenticate(req.session.userId, (err, accType) => {
         if (!err) {
@@ -257,8 +308,25 @@ router.post('/post/categories_table', (req, res) => {
     authenticate(req.session.userId, (err, accType) => {
         if (!err) {
             if (accType != null) {
-                setDataCategoriesTable(req.session.userId, req.body, function (data) {
+                setDataCategoriesTable(req.session.userId, req.body, function () {
                     res.redirect('/profile');
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
+router.post('/post/expense_new', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                createExpense(req.session.userId, req.body, function () {
+                    res.redirect('/expenses');
                 });
             } else {
                 console.log('AUTH : User unauthorized');
@@ -283,12 +351,8 @@ function getDataExpenses(userId, callback) {
 
                 for (var i = 0; i < userLog.account.purchaseHistory.length; i++) {
                     var item = userLog.account.purchaseHistory[i];
-                    // console.log(item);
-                    out[i] = [item.datePurchased, item.cost]
-                    // out[i] = {
-                    //     x: item.datePurchased,
-                    //     y: item.cost
-                    // };
+
+                    out[i] = [item.datePurchased, item.cost];
                 }
 
                 callback(out);
@@ -326,10 +390,6 @@ function getDataExpensesPi(userId, callback) {
                     total += item.cost;
 
                 }
-
-                console.log(outT);
-                console.log(outT.length);
-
                 var index = 0;
 
                 for (var thing in outT) {
@@ -376,6 +436,116 @@ function getDataExpensesTable(userId, callback) {
     });
 }
 
+function getDataExpensesMandatory(userId, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                var out = [];
+                var outT = [];
+
+                var total = 0;
+
+                for (var i = 0; i < userLog.account.purchaseHistory.length; i++) {
+
+                    var item = userLog.account.purchaseHistory[i];
+
+                    var mandatory = false;
+
+                    for (var a = 0; a < 7; a++) {
+                        if (item.purchaseType === userLog.account.purchaseTypeList[a]) {
+                            mandatory = true;
+                        }
+                    }
+
+                    if (mandatory) {
+                        if (outT[item.purchaseType] != null) {
+                            outT[item.purchaseType].cost += item.cost;
+                        } else {
+                            outT[item.purchaseType] = {
+                                cost: item.cost,
+                            }
+                        }
+
+                        total += item.cost;
+                    }
+                }
+
+                var index = 0;
+
+                for (var thing in outT) {
+                    out[index] = {
+                        name: thing,
+                        y: outT[thing].cost * 100.00 / total,
+                    };
+                    index++;
+                }
+
+                callback(out);
+            }
+        }
+    });
+}
+
+function getDataExpensesNonMandatory(userId, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                var out = [];
+                var outT = [];
+
+                var total = 0;
+
+                for (var i = 0; i < userLog.account.purchaseHistory.length; i++) {
+
+                    var item = userLog.account.purchaseHistory[i];
+
+                    var mandatory = false;
+
+                    for (var a = 0; a < 7; a++) {
+                        if (item.purchaseType === userLog.account.purchaseTypeList[a]) {
+                            mandatory = true;
+                        }
+                    }
+
+                    if (!mandatory) {
+                        if (outT[item.purchaseType] != null) {
+                            outT[item.purchaseType].cost += item.cost;
+                        } else {
+                            outT[item.purchaseType] = {
+                                cost: item.cost,
+                            }
+                        }
+
+                        total += item.cost;
+                    }
+                }
+
+                var index = 0;
+
+                for (var thing in outT) {
+                    out[index] = {
+                        name: thing,
+                        y: outT[thing].cost * 100.00 / total,
+                    };
+                    index++;
+                }
+
+                callback(out);
+            }
+        }
+    });
+}
+
 function getDataCategoriesTable(userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
@@ -396,6 +566,21 @@ function getDataCategoriesTable(userId, callback) {
 
                 console.log(out);
                 callback(out);
+            }
+        }
+    });
+}
+
+function getPurchaseType(userId, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                callback(userLog.account.purchaseTypeList);
             }
         }
     });
@@ -427,16 +612,44 @@ function setDataCategoriesTable(userId, body, callback) {
                         purchaseType: body[i].category,
                         datePurchased: d,
                         dateCreated: d,
-                    }
+                    };
 
                     userLog.account.purchaseHistory.push(thing);
                 }
 
                 userLog.save();
+
+                callback();
             }
         }
     });
 }
+
+function createExpense(userId, body, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                var data = {
+                    description: body.description,
+                    cost: body.cost,
+                    purchaseType: body.purchaseType,
+                    datePurchased: body.datePurchased,
+                    dateCreated: Date.now(),
+                }
+
+                userLog.account.purchaseHistory.push(data);
+                userLog.save();
+                callback();
+            }
+        }
+    });
+}
+
 
 // 5c5f6dbb0f23d0505c125942
 
