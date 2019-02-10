@@ -13,7 +13,7 @@ const _path_profile = _path + 'profile.html';
 const _path_reports = _path + 'reports.html';
 const _path_expenses = _path + 'expenses.html';
 
-// createUser('bobross', 'bobross@gmail.com', 'thepainter', true, 'Bob', 'Ross');
+createUser('bobross', 'bobross@gmail.com', 'thepainter', true, 'Bob', 'Ross');
 
 router.post('/login', function (req, res, next) {
     if (req.body.email && req.body.password) {
@@ -121,11 +121,13 @@ function createUser (username, email, password, accountType, name_first, name_la
 
     var purchaseHistory = [];
 
+    var purchaseTypeList = ['Income', 'Food', 'Entertainment', 'Rent', 'Utilities', 'Savings', 'Personal'];
+
     for (var i = 0; i < 10; i++) {
         purchaseHistory[i] = {
             description: 'a singular krispy kreme dunut',
             cost: getRandomInt(100),
-            purchaseType: 'food',
+            purchaseType: purchaseTypeList[i % 7],
             datePurchased: 1549750000 + i*10,
             dateCreated: now,
         }
@@ -141,6 +143,7 @@ function createUser (username, email, password, accountType, name_first, name_la
         dateCreated: now,
         account: {
             balance: 1.23,
+            purchaseTypeList: purchaseTypeList, // Default
             purchaseHistory: purchaseHistory,
         }
     };

@@ -4,6 +4,7 @@ window.onload = function () {
         prev_handler();
     }
     createCharts();
+    setInputType();
 };
 
 function createCharts () {
@@ -113,4 +114,8 @@ function createCharts () {
     };
     xhttp1.open("GET", "/data/expenses_pi", true);
     xhttp1.send();
+}
+
+function setInputType() {
+
 }

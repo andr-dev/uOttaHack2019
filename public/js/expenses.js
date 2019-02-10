@@ -21,7 +21,10 @@ function tableCreate () {
                 var c3 = document.createElement('td');
                 var dateInt = parseInt(data[i].datePurchased);
                 console.log(dateInt);
-                c3.innerHTML = dateInt;// (new Date(dateInt)).toLocaleDateString("en-US", dateOptions);
+                var d = new Date(0);
+                d.setUTCSeconds(dateInt);
+                c3.innerHTML = d.toLocaleDateString("en-US", dateOptions);
+                console.log(c3.innerHTML);
                 var c4 = document.createElement('td');
                 c4.innerHTML = data[i].cost;
 

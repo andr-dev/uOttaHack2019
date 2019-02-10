@@ -50,10 +50,16 @@ var userSchema = new mongoose.Schema({
             type: Number,
             required: true,
         },
+        purchaseTypeList: [{
+            type: String,
+            required: true,
+            trim: true,
+        }],
         purchaseHistory: [{
             description: {
                 type: String,
                 required: false,
+                trim: true,
             },
             cost: {
                 type: Number,
