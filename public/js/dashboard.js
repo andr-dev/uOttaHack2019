@@ -32,11 +32,11 @@ function createCharts () {
                         text: 'Total Expenses ($USD)'
                     }
                 },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle'
-                },
+                // legend: {
+                //     layout: 'vertical',
+                //     align: 'right',
+                //     verticalAlign: 'middle'
+                // },
 
                 plotOptions: {
                     series: {
@@ -48,7 +48,7 @@ function createCharts () {
                 },
 
                 series: [{
-                    name: 'Installation',
+                    name: 'Expenses',
                     data: data1,
                 }],
 
