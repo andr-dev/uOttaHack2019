@@ -13,7 +13,7 @@ const _path_profile = _path + 'profile.html';
 const _path_reports = _path + 'reports.html';
 const _path_expenses = _path + 'expenses.html';
 
-createUser('bobross', 'bobross@gmail.com', 'thepainter', true, 'Bob', 'Ross');
+// createUser('bobross', 'bobross@gmail.com', 'thepainter', true, 'Bob', 'Ross');
 
 router.post('/login', function (req, res, next) {
     if (req.body.email && req.body.password) {
@@ -191,6 +191,23 @@ router.get('/data/expenses_pi', (req, res) => {
     });
 });
 
+router.get('/data/expenses_table', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                getDataExpensesTable(req.session.userId, function (data) {
+                    res.send(data);
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
 function getDataExpenses (userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
@@ -262,6 +279,34 @@ function getDataExpensesPi (userId, callback) {
                 }
 
                 console.log(out);
+
+                callback(out);
+            }
+        }
+    });
+}
+
+function getDataExpensesTable (userId, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                var out = [];
+
+                var data = userLog.account.purchaseHistory;
+
+                for (var i = 0; i < data.length; i++) {
+                    out[i] = {
+                        description: data[i].description,
+                        cost: data[i].cost,
+                        purchaseType: data[i].purchaseType,
+                        datePurchased: data[i].datePurchased
+                    }
+                }
 
                 callback(out);
             }
