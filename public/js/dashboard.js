@@ -67,9 +67,50 @@ function createCharts () {
                 }
 
             });
-
         }
     };
     xhttp.open("GET", "/data/expenses", true);
     xhttp.send();
+
+    var xhttp1= new XMLHttpRequest();
+
+    xhttp1.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const data = JSON.parse(xhttp1.responseText);
+
+            console.log(data);
+
+            var dataSeries = [];
+
+            dataSeries[0] = {
+                name: 'expenses',
+                data: data
+            }
+
+            Highcharts.chart('c2', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Expense Breakdown'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: dataSeries
+            });
+        }
+    };
+    xhttp1.open("GET", "/data/expenses_pi", true);
+    xhttp1.send();
 }
