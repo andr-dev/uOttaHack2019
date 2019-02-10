@@ -4,6 +4,7 @@ html, body {
 	height: 100%;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+  font-family: Raleway;
 }
 /* FOOTER */
 footer {
@@ -52,7 +53,6 @@ figure {
 	padding: 20px;
 	background: #f2f2f2;
 }
-
 .subrow {
   margin: 5px;
   padding:  5px;

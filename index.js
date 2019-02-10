@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 require('mongoose-long')(mongoose);
 var MongoStore = require('connect-mongo')(session);
 
-const _path = __dirname + '/public/';
+const _path = __dirname; // + '/public/';
 
 // mongoose.connect('mongodb+srv://andr-dev:9Pqhz5U3TiyS6eVX@business-webapp-ooehl.gcp.mongodb.net/test?retryWrites=true', {useCreateIndex: true, useNewUrlParser: true});
 mongoose.connect('mongodb://localhost/budgetbuddy', {useCreateIndex: true, useNewUrlParser: true});
@@ -17,11 +17,11 @@ mongoose.set('useFindAndModify', false);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log('Mongoose Connected');
-    setupExpress();
-    // db.dropDatabase(function () {
-    //     console.log('Reset MongoDB Database');
-    //     setupExpress();
-    // });
+    // setupExpress();
+    db.dropDatabase(function () {
+        console.log('Reset MongoDB Database');
+        setupExpress();
+    });
 });
 
 app.use(session({
