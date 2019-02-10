@@ -211,6 +211,40 @@ router.get('/data/expenses_table', (req, res) => {
     });
 });
 
+router.get('/data/categories_table', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                getDataCategoriesTable(req.session.userId, function (data) {
+                    res.send(data);
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
+router.post('/post/categories_table', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                setDataCategoriesTable(req.session.userId, req.body, function (data) {
+                    res.send(data);
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
 function getDataExpenses (userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
@@ -312,6 +346,51 @@ function getDataExpensesTable (userId, callback) {
                 }
 
                 callback(out);
+            }
+        }
+    });
+}
+
+function getDataCategoriesTable (userId, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                var out = [];
+
+                for (var i = 7; i < userLog.account.purchaseTypeList.length; i++) { // 7 hc
+                    out[i] = userLog.account.purchaseTypeList[i];
+                }
+
+                callback(out);
+            }
+        }
+    });
+}
+
+function setDataCategoriesTable (userId, body, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                console.log(body);
+
+                console.log(body[0]);
+
+                console.log(body.length);
+
+                for (var i = 0; i < body.length; i++) {
+                    userLog.account.purchaseTypeList.push(body[i].category);
+                    userLog.save();
+                }
             }
         }
     });

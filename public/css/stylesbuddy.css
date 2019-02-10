@@ -1,11 +1,12 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
 
 html, body {
-	height: 100%;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-  font-family: Raleway;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: Raleway;
 }
+
 /* FOOTER */
 footer {
     background: black;
@@ -16,10 +17,37 @@ footer {
 }
 
 .basic-info-form {
-  margin-left: 60%;
-  padding: 5%;
+    margin-left: 60%;
+    padding: 48px;
 }
 
+.c2 {
+    width: 50%;
+}
+
+.cc {
+    text-align: center;
+}
+
+.c2.l {
+    float: left;
+    justify-content: center;
+    padding: 48px;
+}
+
+.c2.r {
+    float: right;
+    padding: 96px;
+}
+
+#avatar {
+    margin: auto;
+    display: inline-block;
+}
+
+#avatar_change {
+    padding: 16px;
+}
 
 .image--cover {
     background-size: 100%;
@@ -32,36 +60,41 @@ footer {
     margin-right: auto;
 }
 
-figure {
-  float: left;
-  margin-left: 20%
-}
+/*figure {*/
+    /*float: left;*/
+    /*margin-left: 20%;*/
+/*}*/
 
 .seperator {
-  border-bottom: 1px solid #a2a2a2;
-	width: 100%;
-	display: inline-block;
-	margin-top: 2%;
-	margin-bottom: 2%;
-  padding-left: 2%;
-  padding-right: 2%
+    border-bottom: 1px solid #a2a2a2;
+    width: 100%;
+    display: inline-block;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
 }
 
 .form-row {
-	border:  1px solid #e2e2e2;
-	margin:  10px;
-	padding: 20px;
-	background: #f2f2f2;
+    border: 1px solid #e2e2e2;
+    margin: 32px;
+    padding: 24px;
+    background: #f2f2f2;
 }
+
+.form-row.button {
+    padding: 16px;
+}
+
 .subrow {
-  margin: 5px;
-  padding:  5px;
+    margin: 4px;
+    padding: 4px;
 }
 
 .pic-caption {
     text-align: center;
     font-family: Papyrus;
-    font-size: 20px;
+    font-size: 24px;
 
 }
 
@@ -71,16 +104,17 @@ figure {
 }
 
 .content-center {
-  margin-right:10%;
-  margin-left:10%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
-  height: auto;
-  background-color: white;
-  text-align: center;
+    margin-right: 10%;
+    margin-left: 10%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+    height: auto;
+    background-color: white;
 }
 
 h1 {
-  padding-top: 7%
+    padding-top: 32px;
+    padding-bottom: 32px;
+    margin: 0;
 }
 
 .ib {
@@ -89,4 +123,12 @@ h1 {
 
 .cx {
     height: 30%;
+}
+
+.btn {
+    height: 100%;
+    margin-bottom: 0 !important;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding: 8px 24px 8px 24px;
 }
