@@ -80,3 +80,7 @@ h1 {
 .ib {
     width: -webkit-fill-available;
 }
+
+.cx {
+    height: 30%;
+}
