@@ -11,7 +11,7 @@ const _path_login = _path + 'login.html';
 const _path_dashboard = _path + 'dashboard.html';
 const _path_profile = _path + 'profile.html';
 const _path_reports = _path + 'reports.html';
-const _path_expenses = _path + 'reports.html';
+const _path_expenses = _path + 'expenses.html';
 
 createUser('bobross', 'bobross@gmail.com', 'thepainter', true, 'Bob', 'Ross');
 
@@ -119,11 +119,9 @@ function authenticate (userId, callback) {
 function createUser (username, email, password, accountType, name_first, name_last) {
     const now = Math.round((new Date()).getTime() / 1000);
 
-    console.log('THIIIIIIIIIIIIIIIIIIING');
-
     var purchaseHistory = [];
 
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 64; i++) {
         purchaseHistory[i] = {
             description: 'a singular krispy kreme dunut',
             cost: getRandomInt(100),
@@ -190,10 +188,11 @@ function getDataExpenses (userId, callback) {
                 for (var i = 0; i < userLog.account.purchaseHistory.length; i++) {
                     var item = userLog.account.purchaseHistory[i];
                     // console.log(item);
-                    out[i] = {
-                        x: item.datePurchased,
-                        y: item.cost
-                    };
+                    out[i]= [item.datePurchased, item.cost]
+                    // out[i] = {
+                    //     x: item.datePurchased,
+                    //     y: item.cost
+                    // };
                 }
 
                 callback(out);
