@@ -10,6 +10,8 @@ const _path = __dirname + '/views/';
 const _path_login = _path + 'login.html';
 const _path_dashboard = _path + 'dashboard.html';
 const _path_profile = _path + 'profile.html';
+const _path_reports = _path + 'reports.html'
+const _path_expenses = _path + 'reports.html'
 
 createUser('bobross', 'bobross@gmail.com', 'thepainter', true, 'Bob', 'Ross');
 
@@ -68,8 +70,34 @@ router.get('/profile', (req, res) => {
     });
 });
 
-router.get('*', (req, res) => {
-    res.redirect('/dashboard');
+router.get('/reports', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) { // fix depending on user
+                res.sendFile(_path_reports);
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
+router.get('/expenses', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) { // fix depending on user
+                res.sendFile(_path_expenses);
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
 });
 
 function authenticate (userId, callback) {
@@ -88,6 +116,8 @@ function authenticate (userId, callback) {
     });
     return null;
 }
+
+var UserAccount = require('./mongo/budget/UserAccount.js');
 
 function createUser (username, email, password, accountType, name_first, name_last) {
     const now = Math.round((new Date()).getTime() / 1000);
@@ -112,5 +142,60 @@ function createUser (username, email, password, accountType, name_first, name_la
     });
 }
 
+// API
+
+router.get('/data/expenses', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) { // fix depending on user
+                res.send(getDataExpenses(req.session.userId));
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
+function getDataExpenses (userId) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                for (let item in userLog.account.purchaseHistory) {
+                    console.log(item);
+                }
+            }
+        }
+    });
+}
+
+// 5c5f6dbb0f23d0505c125942
+
+router.get('*', (req, res) => {
+    res.redirect('/dashboard');
+});
 
 module.exports = router;
+
+/*
+
+income
+food
+entertainment
+rent
+utility
+savings
+personal
+
+for each
+- budget - double
+- expenses to date - double
+
+ */
