@@ -57,7 +57,7 @@
 
                         </div>
                         <div class="modal-body" style="height: 34vh;">
-                            <form>
+                            <form action="/data/newEntry" method="POST" role="form">
                                 <div >
                                     <div class="form-group col-md-6">
                                         <label for="inputName">Name</label>
@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                                 <div >
-                                    <div class="form-group col-md-4">
+                                    <div class="form-group col-md-6">
                                         <label for="inputType">Type</label>
                                         <select id="inputType" class="form-control">
                                             <option selected>Choose...</option>
@@ -82,19 +82,17 @@
                                             <option>Personal</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputState">State</label>
-                                        <select id="inputState" class="form-control">
-                                            <option selected>Choose...</option>
-                                            <option>...</option>
-                                        </select>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputDate">Date</label>
+                                        <input type="date" class="form-control" id="inputDate" placeholder="Amount">
+
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
