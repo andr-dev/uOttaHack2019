@@ -15,7 +15,7 @@
             <div class="container-fluid">
                <!-- Logo -->
                <div class="navbar-header">
-                  <a href="#" class="navbar-brand">Budget Buddy</a>
+                  <img src="../public/images/banner_budgetbuddy_x1024.png" style="height: 50px; padding-right: 8px;">
                </div>
                <!-- Menu Items -->
                <div>
@@ -71,6 +71,9 @@
                         <div class="col-xs-3">
                            <input type="text" class="form-control" placeholder="Value" v-model="row.name2">
                         </div>
+                        <div class="col-xs-2">
+									         <input type="checkbox" v-model="row.check">&nbsp;&nbsp;Mandatory
+								        </div>
                         <div class="col-xs-1">
                            <button class="btn btn-danger" @click="deleteRow(row)">X</button>
                         </div>
