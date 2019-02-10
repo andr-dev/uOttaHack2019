@@ -142,13 +142,12 @@ function authenticate(userId, callback) {
 
 function createUser(username, email, password, accountType, name_first, name_last) {
     const now = Date.now();
-    ;
 
     var purchaseHistory = [];
 
     var purchaseTypeList = ['Income', 'Food', 'Entertainment', 'Rent', 'Utilities', 'Savings', 'Personal'];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 7; i++) {
         purchaseHistory[i] = {
             description: 'a singular krispy kreme dunut',
             cost: getRandomInt(100),
@@ -156,7 +155,7 @@ function createUser(username, email, password, accountType, name_first, name_las
             datePurchased: now + i * 10,
             dateCreated: now,
         }
-    }
+    };
 
     const userThing = {
         username: username,
