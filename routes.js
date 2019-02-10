@@ -35,8 +35,32 @@ router.post('/login', function (req, res, next) {
     }
 });
 
+router.get('/logout', function (req, res, next) {
+    if (req.session) {
+        console.log('AUTH : Session ID [%s] logging out', req.session.userId);
+        req.session.destroy(function (err) {
+            if (err) {
+                console.error('|- FATAL DB ERROR');
+            } else {
+                console.log('|- Log out successful');
+                res.redirect('/');
+            }
+        })
+    }
+});
+
 router.get('/', (req, res, next) => {
-    res.sendFile(_path_login);
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) { // fix depending on user
+                res.redirect('/dashboard')
+            } else {
+                res.sendFile(_path_login);
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
 });
 
 router.get('/dashboard', (req, res) => {
@@ -99,7 +123,7 @@ router.get('/expenses', (req, res) => {
     });
 });
 
-function authenticate (userId, callback) {
+function authenticate(userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
             console.log('AUTH : Error searching for userId [%s]', userId);
@@ -116,8 +140,9 @@ function authenticate (userId, callback) {
     return null;
 }
 
-function createUser (username, email, password, accountType, name_first, name_last) {
-    const now = Date.now();;
+function createUser(username, email, password, accountType, name_first, name_last) {
+    const now = Date.now();
+    ;
 
     var purchaseHistory = [];
 
@@ -128,7 +153,7 @@ function createUser (username, email, password, accountType, name_first, name_la
             description: 'a singular krispy kreme dunut',
             cost: getRandomInt(100),
             purchaseType: purchaseTypeList[i % 7],
-            datePurchased: now + i*10,
+            datePurchased: now + i * 10,
             dateCreated: now,
         }
     }
@@ -245,7 +270,7 @@ router.post('/post/categories_table', (req, res) => {
     });
 });
 
-function getDataExpenses (userId, callback) {
+function getDataExpenses(userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
             console.log('AUTH : Error searching for userId [%s]', userId);
@@ -259,7 +284,7 @@ function getDataExpenses (userId, callback) {
                 for (var i = 0; i < userLog.account.purchaseHistory.length; i++) {
                     var item = userLog.account.purchaseHistory[i];
                     // console.log(item);
-                    out[i]= [item.datePurchased, item.cost]
+                    out[i] = [item.datePurchased, item.cost]
                     // out[i] = {
                     //     x: item.datePurchased,
                     //     y: item.cost
@@ -272,7 +297,7 @@ function getDataExpenses (userId, callback) {
     });
 }
 
-function getDataExpensesPi (userId, callback) {
+function getDataExpensesPi(userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
             console.log('AUTH : Error searching for userId [%s]', userId);
@@ -323,7 +348,7 @@ function getDataExpensesPi (userId, callback) {
     });
 }
 
-function getDataExpensesTable (userId, callback) {
+function getDataExpensesTable(userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
             console.log('AUTH : Error searching for userId [%s]', userId);
@@ -351,7 +376,7 @@ function getDataExpensesTable (userId, callback) {
     });
 }
 
-function getDataCategoriesTable (userId, callback) {
+function getDataCategoriesTable(userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
             console.log('AUTH : Error searching for userId [%s]', userId);
@@ -376,7 +401,7 @@ function getDataCategoriesTable (userId, callback) {
     });
 }
 
-function setDataCategoriesTable (userId, body, callback) {
+function setDataCategoriesTable(userId, body, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
             console.log('AUTH : Error searching for userId [%s]', userId);
