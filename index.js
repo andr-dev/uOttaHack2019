@@ -17,11 +17,11 @@ mongoose.set('useFindAndModify', false);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log('Mongoose Connected');
-    setupExpress();
-    // db.dropDatabase(function () {
-    //     console.log('Reset MongoDB Database');
-    //     setupExpress();
-    // });
+    // setupExpress();
+    db.dropDatabase(function () {
+        console.log('Reset MongoDB Database');
+        setupExpress();
+    });
 });
 
 app.use(session({
