@@ -7,26 +7,18 @@ var Long = mongoose.Schema.Types.Long;
 var Double = mongoose.Schema.Types.Double;
 
 var UserAccountSchema = new mongoose.Schema({
-    cost: {
-        type: String,
+    balance: {
+        type: Double,
+        default: 0.00,
         required: true,
     },
-    type: {
-        type: String,
+    purchaseHistory: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user_account_purchaseitem',
         required: true,
-        trim: true,
-        index: true,
-    },
-    datePurchased: {
-        type: Long,
-        required: true,
-    },
-    dateCreated: {
-        type: Long,
-        required: true,
-    }
+    }],
 });
 
-var UserAccount = mongoose.model('UserAccount', UserAccountSchema);
+var UserAccount = mongoose.model('user_account', UserAccountSchema);
 
 module.exports = UserAccount;

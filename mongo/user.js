@@ -51,8 +51,9 @@ var userSchema = new mongoose.Schema({
     },
     account: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserAccount',
-    }
+        ref: 'user_account',
+        required: true,
+    },
 });
 
 userSchema.path('password').validate(function(psw) {
