@@ -37,70 +37,12 @@
 
 <div class="container">
     <div class="row" style="display: flex;">
-        <div class="col ib cx" id="c1">Column</div>
-        <div class="col ib cx" id="c2">Column</div>
+        <div class="col ib cx" id="c1"></div>
+        <div class="col ib cx" id="c2"></div>
     </div>
     <div class="row" style="display: flex;">
-        <div class="col ib cx" id="c3">Column</div>
-        <div class="col ib cx" id="c4">Column</div>
-    </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Add an entry
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #337ab7; color: white;">
-                    <h5 class="modal-title" id="exampleModalLabel">Create your expense
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </h5>
-
-                </div>
-                <div class="modal-body" style="height: 35vh;">
-                    <form action="/post/new_expense" method="POST" role="form">
-                        <div>
-                            <div class="form-group col-md-6">
-                                <label for="inputName">Name</label>
-                                <input type="test" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputAmount">Amount</label>
-                                <input type="number" class="form-control" id="inputAmount" placeholder="Amount">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="form-group col-md-6">
-                                <label for="inputType">Type</label>
-                                <select id="inputType" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>Income</option>
-                                    <option>Food</option>
-                                    <option>Entertainment</option>
-                                    <option>Rent</option>
-                                    <option>Utilities</option>
-                                    <option>Savings</option>
-                                    <option>Personal</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputDate">Date</label>
-                                <input type="date" class="form-control" id="inputDate" placeholder="Amount">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
+        <div class="col ib cx" id="c3"></div>
+        <div class="col ib cx" id="c4"></div>
     </div>
 </div>
 

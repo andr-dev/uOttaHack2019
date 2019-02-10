@@ -38,12 +38,57 @@ function tableCreate () {
     });
 }
 
+function addPurchaseTypes () {
+    getJSON('/data/purchase_type', function (err, data) {
+        if (err !== null) {
+            console.log('Routing error!!!');
+            console.log('ERR: [%s]', err)
+        } else {
+            var inputType = document.getElementById('inputType');
+
+            for (var i = 0; i < data.length; i++) {
+                var a = document.createElement('option');
+                a.innerHTML = data[i];
+                inputType.appendChild(a);
+            }
+        }
+    })
+}
+
+function postExpenseData () {
+    console.log('u hit the button');
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            location.reload();
+        }
+    };
+
+    xhttp.open("POST", '/post/expense_new', true);
+
+    var out = {
+        description: document.getElementById('inputDescription').value,
+        cost: document.getElementById('inputCost').value,
+        purchaseType: document.getElementById('inputType').value,
+        datePurchased: new Date(document.getElementById('inputDate').value).getTime(),
+    };
+
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+
+    console.log(out);
+
+    xhttp.send(JSON.stringify(out));
+}
+
+
 var prev_handler = window.onload;
 window.onload = function () {
     if (prev_handler) {
         prev_handler();
     }
     tableCreate();
+    addPurchaseTypes();
 };
 
 const getJSON = function (url, callback) {
