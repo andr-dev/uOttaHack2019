@@ -16,15 +16,14 @@ function tableCreate () {
 
                 var c1 = document.createElement('td');
                 c1.innerHTML = data[i].purchaseType;
+
                 var c2 = document.createElement('td');
                 c2.innerHTML = data[i].description;
+
                 var c3 = document.createElement('td');
-                var dateInt = parseInt(data[i].datePurchased);
-                console.log(dateInt);
-                var d = new Date(0);
-                d.setUTCSeconds(dateInt);
+                var d = new Date(parseInt(data[i].datePurchased));
                 c3.innerHTML = d.toLocaleDateString("en-US", dateOptions);
-                console.log(c3.innerHTML);
+
                 var c4 = document.createElement('td');
                 c4.innerHTML = data[i].cost;
 
