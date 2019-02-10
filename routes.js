@@ -121,7 +121,7 @@ function createUser (username, email, password, accountType, name_first, name_la
 
     var purchaseHistory = [];
 
-    for (var i = 0; i < 64; i++) {
+    for (var i = 0; i < 10; i++) {
         purchaseHistory[i] = {
             description: 'a singular krispy kreme dunut',
             cost: getRandomInt(100),
@@ -174,6 +174,23 @@ router.get('/data/expenses', (req, res) => {
     });
 });
 
+router.get('/data/expenses_pi', (req, res) => {
+    authenticate(req.session.userId, (err, accType) => {
+        if (!err) {
+            if (accType != null) {
+                getDataExpensesPi(req.session.userId, function (data) {
+                    res.send(data);
+                });
+            } else {
+                console.log('AUTH : User unauthorized');
+                res.redirect('/');
+            }
+        } else {
+            res.send('Internal Server Error');
+        }
+    });
+});
+
 function getDataExpenses (userId, callback) {
     user.findById(userId).exec(function (error, userLog) {
         if (error) {
@@ -194,6 +211,57 @@ function getDataExpenses (userId, callback) {
                     //     y: item.cost
                     // };
                 }
+
+                callback(out);
+            }
+        }
+    });
+}
+
+function getDataExpensesPi (userId, callback) {
+    user.findById(userId).exec(function (error, userLog) {
+        if (error) {
+            console.log('AUTH : Error searching for userId [%s]', userId);
+            callback(null);
+        } else {
+            if (userLog === null) {
+                callback(null);
+            } else {
+                var out = [];
+                var outT = [];
+
+                var total = 0;
+
+                for (var i = 0; i < userLog.account.purchaseHistory.length; i++) {
+
+                    var item = userLog.account.purchaseHistory[i];
+
+                    if (outT[item.purchaseType] != null) {
+                        outT[item.purchaseType].cost += item.cost;
+                    } else {
+                        outT[item.purchaseType] = {
+                            cost: item.cost,
+                        }
+                    }
+
+                    total += item.cost;
+
+                }
+
+                console.log(outT);
+                console.log(outT.length);
+
+                var index = 0;
+
+                for (var thing in outT) {
+                    out[index] = {
+                        name: thing,
+                        y: outT[thing].cost * 100.00 / total,
+                    };
+                    index++;
+                }
+
+                console.log(out);
 
                 callback(out);
             }
