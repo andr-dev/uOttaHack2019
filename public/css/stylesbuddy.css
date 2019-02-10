@@ -43,6 +43,7 @@ footer {
 #avatar {
     margin: auto;
     display: inline-block;
+    width: 40%;
 }
 
 #avatar_change {
@@ -91,12 +92,6 @@ footer {
     padding: 4px;
 }
 
-.pic-caption {
-    text-align: center;
-    font-family: Papyrus;
-    font-size: 24px;
-
-}
 
 .categories {
     width: 100%;
@@ -131,4 +126,23 @@ h1 {
     margin-left: 8px;
     margin-right: 8px;
     padding: 8px 24px 8px 24px;
+}
+
+footers.creators{
+    margin: 0;
+    list-style-type: none;
+    display: inline;
+
+}
+
+.footer-nav li {
+    display: inline;
+    margin-right: 8%;
+}
+
+.footerDate{
+    font-size: 24px;
+    text-decoration-color: #818182;
+    text-decoration-style: double;
+    text-underline: #818182;
 }
