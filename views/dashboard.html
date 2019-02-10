@@ -9,7 +9,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
+    <script src="../public/js/highcharts.js"></script>
 </head>
 <body>
 <header>
@@ -23,10 +23,10 @@
             <!-- Menu Items -->
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="dashboard.html">Overview</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li><a href="reports.html">Reports</a></li>
-                    <li><a href="expenses.html">Expenses</a></li>
+                    <li class="active"><a href="">Overview</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/reports">Reports</a></li>
+                    <li><a href="/expenses">Expenses</a></li>
                 </ul>
             </div>
         </div>
@@ -35,14 +35,14 @@
 
 <div class="container">
     <div class="row" style="display: flex;">
-        <div class="col ib">Column</div>
-        <div class="col ib">Column</div>
-        <div class="col ib">Column</div>
+        <div class="col ib cx" id="c1">Column</div>
+        <div class="col ib cx" id="c2">Column</div>
+        <div class="col ib cx" id="c3">Column</div>
     </div>
     <div class="row" style="display: flex;">
-        <div class="col ib">Column</div>
-        <div class="col ib">Column</div>
-        <div class="col ib">Column</div>
+        <div class="col ib cx" id="c4">Column</div>
+        <div class="col ib cx" id="c5">Column</div>
+        <div class="col ib cx" id="c6">Column</div>
     </div>
 </div>
 
@@ -52,4 +52,5 @@
 </footer>
 <!-- Footer -->
 </body>
+<script src="../public/js/dashboard.js"></script>
 </html>
