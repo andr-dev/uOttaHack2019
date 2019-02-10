@@ -27,6 +27,6 @@ var PurchaseItemSchema = new mongoose.Schema({
     }
 });
 
-var PurchaseItem = mongoose.model('PurchaseItem', PurchaseItemSchema);
+var PurchaseItem = mongoose.model('user_account_purchaseitem', PurchaseItemSchema);
 
 module.exports = PurchaseItem;
