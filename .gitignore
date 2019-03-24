@@ -74,7 +74,4 @@ typings/
 
 # FuseBox cache
 .fusebox/
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
-.idea/workspace.xml
+.idea/
