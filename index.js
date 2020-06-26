@@ -1,3 +1,5 @@
+/* Writen by Andre Benedito for uOttaHack2019 */
+
 var express = require("express");
 var fs = require('fs');
 var app = express();
@@ -25,7 +27,7 @@ db.once('open', function () {
 });
 
 app.use(session({
-    secret: 'abcde12345_idk_uOttaHack2019',
+    secret: 'abcde12345_idk_uOttaHack2019', // This should be changed for security purposes!
     resave: true,
     saveUninitialized: false,
     store: new MongoStore({

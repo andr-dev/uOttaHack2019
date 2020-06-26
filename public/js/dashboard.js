@@ -30,7 +30,8 @@ function createCharts () {
                 yAxis: {
                     title: {
                         text: 'Total Expenses ($USD)'
-                    }
+                    },
+                    min: 0,
                 },
                 // legend: {
                 //     layout: 'vertical',
@@ -43,7 +44,7 @@ function createCharts () {
                         label: {
                             connectorAllowed: false
                         },
-                        pointStart: 2010
+                        pointStart: 2012
                     }
                 },
 
