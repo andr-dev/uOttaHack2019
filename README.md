@@ -13,10 +13,10 @@ BudgetBuddy is a simple and efficient webapp which aims to help university stude
 ## Demo
 
 ### Login Page
-![Login](https://github.com/andr-dev/uOttaHack2019/demo/login.jpg)
+![Login](https://github.com/andr-dev/uOttaHack2019/blob/master/demo/login.jpg?raw=true)
 
 ### Overview Page
-![Overview Page](https://github.com/andr-dev/uOttaHack2019/demo/overview.jpg)
+![Overview Page](https://github.com/andr-dev/uOttaHack2019/blob/master/demo/overview.jpg?raw=true)
 
 ## Background
 
