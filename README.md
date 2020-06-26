@@ -40,4 +40,4 @@ We used Node.JS to write the backend which connects to a Mongo database to store
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-- **[MIT license](https://github.com/andr-dev/Chromethesia/raw/master/LICENSE.md)**
+- **[MIT license](https://github.com/andr-dev/uOttaHack2019/blob/master/LICENSE)**
