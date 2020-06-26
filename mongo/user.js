@@ -97,7 +97,7 @@ userSchema.statics.authenticate = function (email, password, callback) {
         if (err) {
             return callback(err)
         } else if (!userAcc) {
-            var err = new Error('User not found.');
+            var err = new Error('User with email [%s] was not found.', email);
             err.status = 401;
             return callback(err);
         }
@@ -111,17 +111,24 @@ userSchema.statics.authenticate = function (email, password, callback) {
     });
 }
 
+var firstTime = true;
+
 // HASH BEORE SAVING
 userSchema.pre('save', function (next) {
-    var user = this;
-    bcrypt.hash(user.password, 10, function (err, hash) {
-        if (err) {
-            return next(err);
-        }
-        user.password = hash;
-        console.log('Created user with password [%s]', user.password);
+    if (firstTime) {
+        firstTime = false;
+        var user = this;
+        bcrypt.hash(user.password, 10, function (err, hash) {
+            if (err) {
+                return next(err);
+            }
+            user.password = hash;
+            console.log('Created user with password [%s]', user.password);
+            next();
+        })
+    } else {
         next();
-    })
+    }
 });
 
 var user = mongoose.model('user', userSchema);
