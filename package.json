@@ -14,7 +14,7 @@
     "connect-mongo": "^2.0.3",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "highcharts": "^7.0.3",
+    "highcharts": "^9.0.0",
     "mongoose": "^5.4.11",
     "mongoose-long": "^0.2.1",
     "mongoose-unique-validator": "^2.0.2",
